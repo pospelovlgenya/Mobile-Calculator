@@ -125,18 +125,30 @@ import { orientation } from '@nativescript/core/application';
         place-items: center;
         place-content: center;
         place-self: center;
-        margin: 10px 10px 10px 10px;
+        margin: 20px 20px 20px 20px;
+        border: #FFFFFF;
+        border-radius: 100px;
         color: #FFFFFF;
         background-color: #000000;
+    }
+    .numButton:active {
+        color: #000000;
+        background-color: #00FFFF;
     }
     .funcButton {
         font-size: 30pt;
         place-items: center;
         place-content: center;
         place-self: center;
-        margin: 10px 10px 10px 10px;
+        margin: 20px 20px 20px 20px;
+        border: #FFFFFF;
+        border-radius: 100px;
         color: #FFFF00;
         background-color: #000000;
+    }
+    .funcButton:active {
+        color: #0000FF;
+        background-color: #00FFFF;
     }
 
 </style>
