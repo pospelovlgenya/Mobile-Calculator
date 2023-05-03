@@ -61,7 +61,7 @@ import { orientation } from '@nativescript/core/application';
             getResult: function()
             {
                 try {
-                    this.getShow('=' + eval(this.strForFinal.replace('^', '**').replace('/0', 'нет')));
+                    this.getShow(('=' + eval(this.strForFinal.replace('^', '**').replace('/0', 'нет'))).replace('=NaN', 'Вы ошиблись').replace('=undefined', 'Вы ошиблись'));
                 }
                 catch {
                     this.getShow("Вы ошиблись")
@@ -103,57 +103,5 @@ import { orientation } from '@nativescript/core/application';
 
 <style scoped lang="scss">
     @import '@nativescript/theme/scss/variables/blue';
-
-    // Custom styles
-    .header {
-        font-size: 30pt;
-        place-items: center;
-        place-content: center;
-        padding: 10px 10px 10px 10px;
-        margin: 10px 10px 10px 10px;
-        color:  #000000;
-    }
-
-    .label{
-        font-size: 30pt;
-        padding-left: 10%;
-        padding-right: 5%;
-        place-items: right;
-        place-content: right;
-        place-self: right;
-        color: #FFFFFF;
-        background-color: #000000;
-    }
-
-    .numButton {
-        font-size: 30pt;
-        place-items: center;
-        place-content: center;
-        place-self: center;
-        margin: 20px 20px 20px 20px;
-        border: #FFFFFF;
-        border-radius: 100px;
-        color: #FFFFFF;
-        background-color: #000000;
-    }
-    .numButton:active {
-        color: #000000;
-        background-color: #00FFFF;
-    }
-    .funcButton {
-        font-size: 30pt;
-        place-items: center;
-        place-content: center;
-        place-self: center;
-        margin: 20px 20px 20px 20px;
-        border: #FFFFFF;
-        border-radius: 100px;
-        color: #FFFF00;
-        background-color: #000000;
-    }
-    .funcButton:active {
-        color: #0000FF;
-        background-color: #00FFFF;
-    }
-
+    @import 'app/app.scss';
 </style>

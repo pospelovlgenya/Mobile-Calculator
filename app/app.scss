@@ -5,17 +5,55 @@
 // This is where the vast majority of your CSS code goes.
 
 // Font icon class
-.fab {
-  font-family: 'Font Awesome 5 Brands', 'fa-brands-400';
-  font-weight: 400;
+
+.header {
+  font-size: 30pt;
+  place-items: center;
+  place-content: center;
+  padding: 10px 10px 10px 10px;
+  margin: 10px 10px 10px 10px;
+  color:  #000000;
 }
 
-.fas {
-  font-family: 'Font Awesome 5 Free', 'fa-solid-900';
-  font-weight: 900;
+.label{
+  font-size: 30pt;
+  padding-left: 10%;
+  padding-right: 5%;
+  place-items: right;
+  place-content: right;
+  place-self: right;
+  color: #FFFFFF;
+  background-color: #000000;
 }
 
-.far {
-  font-family: 'Font Awesome 5 Free', 'fa-regular-400';
-  font-weight: 400;
+.numButton {
+  font-size: 30pt;
+  place-items: center;
+  place-content: center;
+  place-self: center;
+  margin: 20px 20px 20px 20px;
+  border: #FFFFFF;
+  border-radius: 100px;
+  color: #FFFFFF;
+  background-color: #000000;
+}
+.numButton:active {
+  color: #000000;
+  background-color: #00FFFF;
+}
+
+.funcButton {
+  font-size: 30pt;
+  place-items: center;
+  place-content: center;
+  place-self: center;
+  margin: 20px 20px 20px 20px;
+  border: #FFFFFF;
+  border-radius: 100px;
+  color: #FFFF00;
+  background-color: #000000;
+}
+.funcButton:active {
+  color: #0000FF;
+  background-color: #00FFFF;
 }
