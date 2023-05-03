@@ -58,7 +58,12 @@ import { orientation } from '@nativescript/core/application';
         methods: {
             getResult: function()
             {
-                this.getShow('=' + eval(this.strForFinal.replace('^', '**')));
+                try {
+                    this.getShow('=' + eval(this.strForFinal.replace('^', '**').replace('/0', 'нет')));
+                }
+                catch {
+                    this.getShow("Вы ошиблись")
+                }
             },
             addToStr: function(el)
             {
@@ -82,12 +87,10 @@ import { orientation } from '@nativescript/core/application';
                 let coef = orientation() == "portrait"? 1 : 2;
                 let len = str.length;
                 let maxLen = 23 * coef - 1;
-                if (len >= maxLen)
-                {
+                if (len >= maxLen) {
                     this.show = str.slice(len - maxLen, len);
                 }
-                else
-                {
+                else {
                     let rep = maxLen - len;
                     this.show = ' '.repeat(rep*1.2) + str;
                 }
