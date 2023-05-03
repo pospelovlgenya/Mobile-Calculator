@@ -1,30 +1,30 @@
 <template>
     <Page>
         <ActionBar>
-            <Label text="Calculator"/>
-            <Label>{{ result }}</Label>
+            <Label text="Calculator 3000" class="header" />
         </ActionBar>
-
-        <GridLayout rows="*, *, *, *" columns="*, *, *, *" class="info">
-          <Label text="1" row="0" col="0" @tap="addToStr('1')" />
-          <Label text="2" row="0" col="1" @tap="addToStr('2')"/>
-          <Label text="3" row="0" col="2" @tap="addToStr('3')"/>
-          <Label text="+" row="0" col="3" @tap="addToStr('+')"/>
-
-          <Label text="4" row="1" col="0" @tap="addToStr('4')"/>
-          <Label text="5" row="1" col="1" @tap="addToStr('5')"/>
-          <Label text="6" row="1" col="2" @tap="addToStr('6')"/>
-          <Label text="*" row="1" col="3" @tap="addToStr('*')"/>
+        
+        
+        <GridLayout rows="*, *, *, *, *" columns="*, *, *, *">
+            <Label row="0" col="0" colSpan="4" class="label">{{ result }}</Label>
+            
+            <Button text="1" row="1" col="0" class="button" @tap="addToStr('1')"/>
+            <Button text="2" row="1" col="1" class="button" @tap="addToStr('2')"/>
+            <Button text="3" row="1" col="2" class="button" @tap="addToStr('3')"/>
+            <Button text="4" row="2" col="0" class="button" @tap="addToStr('4')"/>
+            <Button text="5" row="2" col="1" class="button" @tap="addToStr('5')"/>
+            <Button text="6" row="2" col="2" class="button" @tap="addToStr('6')"/>
+            <Button text="7" row="3" col="0" class="button" @tap="addToStr('7')"/>
+            <Button text="8" row="3" col="1" class="button" @tap="addToStr('8')"/>
+            <Button text="9" row="3" col="2" class="button" @tap="addToStr('9')"/>
+            <Button text="0" row="4" col="0" class="button" @tap="addToStr('0')"/>
           
-          <Label text="7" row="2" col="0" @tap="addToStr('7')"/>
-          <Label text="8" row="2" col="1" @tap="addToStr('8')"/>
-          <Label text="9" row="2" col="2" @tap="addToStr('9')"/>
-          <Label text="^" row="2" col="3" @tap="addToStr('^')"/>
-
-          <Label text="0" row="3" col="0" @tap="addToStr('0')"/>
-          <Label text="/" row="3" col="1" @tap="addToStr('/')"/>
-          <Label text="-" row="3" col="2" @tap="addToStr('-')"/>
-          <Label text="=" row="3" col="3" @tap="getResult()"/>
+            <Button text="+" row="1" col="3" class="button" @tap="addToStr('+')"/>
+            <Button text="*" row="2" col="3" class="button" @tap="addToStr('*')"/>
+            <Button text="^" row="3" col="3" class="button" @tap="addToStr('^')"/>
+            <Button text="/" row="4" col="1" class="button" @tap="addToStr('/')"/>
+            <Button text="-" row="4" col="2" class="button" @tap="addToStr('-')"/>
+            <Button text="=" row="4" col="3" class="button" @tap="getResult()"/>
         </GridLayout>
         
         
@@ -47,6 +47,7 @@
             addToStr: function(el)
             {
                 this.strForFinal += el;
+                this.result = this.strForFinal;
             },
             delFromStr: function()
             {
@@ -61,12 +62,23 @@
     @import '@nativescript/theme/scss/variables/blue';
 
     // Custom styles
-    .fas {
-        @include colorize($color: accent);
+    .header {
+        font-size: 30pt;
+        place-items: center;
+        place-content: center;
     }
 
-    .info {
-        font-size: 20;
+    .label{
+        font-size: 30pt;
+        place-items: right;
+        place-content: right;
+        place-self: right;
+    }
+
+    .button {
+        font-size: 30pt;
+        place-items: center;
+        place-content: center;
         place-self: center;
     }
 </style>
