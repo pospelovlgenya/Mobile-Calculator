@@ -19,12 +19,14 @@
             <Button text="9" row="2" col="3" class="numButton" @tap="addToStr('9')"/>
             <Button text="0" row="5" col="2" class="numButton" @tap="addToStr('0')"/>
 
+            
+            <Button text="-(x)" row="5" col="1" class="funcButton" @tap="modStr('-', '')"/>
             <Button text="." row="5" col="3" class="funcButton" @tap="addToStr('.')"/>
           
             
-            <Button text="x^y" row="2" col="0" class="funcButton" @tap="modStr('^')"/>
-            <Button text="x^2" row="3" col="0" class="funcButton" @tap="modStr('^2')"/>
-            <Button text="√x" row="4" col="0" class="funcButton" @tap="modStr('^0.5')"/>
+            <Button text="x^y" row="2" col="0" class="funcButton" @tap="modStr('', '^')"/>
+            <Button text="x^2" row="3" col="0" class="funcButton" @tap="modStr('', '^2')"/>
+            <Button text="√x" row="4" col="0" class="funcButton" @tap="modStr('', '^0.5')"/>
             <Button text="^" row="5" col="0" class="funcButton" @tap="addToStr('^')"/>
             
             <Button text="C" row="1" col="0" class="funcButton" @tap="reFresh()"/>
@@ -52,7 +54,7 @@ import { orientation } from '@nativescript/core/application';
         data () {
             return {
             show: ' ',
-            strForFinal: ' ',
+            strForFinal: '',
             }
         },
         methods: {
@@ -70,8 +72,8 @@ import { orientation } from '@nativescript/core/application';
                 this.strForFinal += el;
                 this.getShow(this.strForFinal);
             },
-            modStr: function(el) {
-                this.strForFinal = '(' + this.strForFinal + ')' + el
+            modStr: function(stel, enel) {
+                this.strForFinal = stel + '(' + this.strForFinal + ')' + enel;
                 this.getShow(this.strForFinal);
             },
             delFromStr: function()
@@ -80,7 +82,7 @@ import { orientation } from '@nativescript/core/application';
                 this.getShow(this.strForFinal);
             },
             reFresh: function() {
-                this.strForFinal = ' ';
+                this.strForFinal = '';
                 this.getShow(this.strForFinal);
             },
             getShow: function(str) {
