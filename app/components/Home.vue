@@ -1,30 +1,44 @@
 <template>
-    <Page>
-        <ActionBar>
+    <Page style="background-color: #000000;">
+        <ActionBar style="background-color: #FFFF00;">
             <Label text="Calculator 3000" class="header" />
         </ActionBar>
         
         
-        <GridLayout rows="*, *, *, *, *" columns="*, *, *, *">
-            <Label row="0" col="0" colSpan="4" class="label">{{ result }}</Label>
+        <GridLayout rows="*, *, *, *, *, *" columns="*, *, *, *, *">
+            <Label row="0" col="0" colSpan="5" class="label">{{ show }}</Label>
             
-            <Button text="1" row="1" col="0" class="button" @tap="addToStr('1')"/>
-            <Button text="2" row="1" col="1" class="button" @tap="addToStr('2')"/>
-            <Button text="3" row="1" col="2" class="button" @tap="addToStr('3')"/>
-            <Button text="4" row="2" col="0" class="button" @tap="addToStr('4')"/>
-            <Button text="5" row="2" col="1" class="button" @tap="addToStr('5')"/>
-            <Button text="6" row="2" col="2" class="button" @tap="addToStr('6')"/>
-            <Button text="7" row="3" col="0" class="button" @tap="addToStr('7')"/>
-            <Button text="8" row="3" col="1" class="button" @tap="addToStr('8')"/>
-            <Button text="9" row="3" col="2" class="button" @tap="addToStr('9')"/>
-            <Button text="0" row="4" col="0" class="button" @tap="addToStr('0')"/>
+            <Button text="1" row="4" col="1" class="numButton" @tap="addToStr('1')"/>
+            <Button text="2" row="4" col="2" class="numButton" @tap="addToStr('2')"/>
+            <Button text="3" row="4" col="3" class="numButton" @tap="addToStr('3')"/>
+            <Button text="4" row="3" col="1" class="numButton" @tap="addToStr('4')"/>
+            <Button text="5" row="3" col="2" class="numButton" @tap="addToStr('5')"/>
+            <Button text="6" row="3" col="3" class="numButton" @tap="addToStr('6')"/>
+            <Button text="7" row="2" col="1" class="numButton" @tap="addToStr('7')"/>
+            <Button text="8" row="2" col="2" class="numButton" @tap="addToStr('8')"/>
+            <Button text="9" row="2" col="3" class="numButton" @tap="addToStr('9')"/>
+            <Button text="0" row="5" col="2" class="numButton" @tap="addToStr('0')"/>
+
+            <Button text="." row="5" col="3" class="funcButton" @tap="addToStr('.')"/>
           
-            <Button text="+" row="1" col="3" class="button" @tap="addToStr('+')"/>
-            <Button text="*" row="2" col="3" class="button" @tap="addToStr('*')"/>
-            <Button text="^" row="3" col="3" class="button" @tap="addToStr('^')"/>
-            <Button text="/" row="4" col="1" class="button" @tap="addToStr('/')"/>
-            <Button text="-" row="4" col="2" class="button" @tap="addToStr('-')"/>
-            <Button text="=" row="4" col="3" class="button" @tap="getResult()"/>
+            
+            <Button text="x^y" row="2" col="0" class="funcButton" @tap="modStr('^')"/>
+            <Button text="x^2" row="3" col="0" class="funcButton" @tap="modStr('^2')"/>
+            <Button text="√x" row="4" col="0" class="funcButton" @tap="modStr('^0.5')"/>
+            <Button text="^" row="5" col="0" class="funcButton" @tap="addToStr('^')"/>
+            
+            <Button text="C" row="1" col="0" class="funcButton" @tap="reFresh()"/>
+            <Button text="BS" row="1" col="1" class="funcButton" @tap="delFromStr()"/>
+            <Button text="(" row="1" col="2" class="funcButton" @tap="addToStr('(')"/>
+            <Button text=")" row="1" col="3" class="funcButton" @tap="addToStr(')')"/>
+
+            <Button text="/" row="1" col="4" class="funcButton" @tap="addToStr('/')"/>
+            <Button text="*" row="2" col="4" class="funcButton" @tap="addToStr('*')"/>
+            <Button text="-" row="3" col="4" class="funcButton" @tap="addToStr('-')"/>
+            <Button text="+" row="4" col="4" class="funcButton" @tap="addToStr('+')"/>
+            <Button text="=" row="5" col="4" class="funcButton" @tap="getResult()"/>
+            
+
         </GridLayout>
         
         
@@ -32,30 +46,54 @@
 </template>
 
 <script>
+import { orientation } from '@nativescript/core/application';
+
     export default {
         data () {
             return {
-            result: 0,
-            strForFinal: '',
+            show: ' ',
+            strForFinal: ' ',
             }
         },
         methods: {
             getResult: function()
             {
-                this.result = eval(this.strForFinal.replace('^', '**'));     
+                this.getShow('=' + eval(this.strForFinal.replace('^', '**')));
             },
             addToStr: function(el)
             {
                 this.strForFinal += el;
-                this.result = this.strForFinal;
+                this.getShow(this.strForFinal);
+            },
+            modStr: function(el) {
+                this.strForFinal = '(' + this.strForFinal + ')' + el
+                this.getShow(this.strForFinal);
             },
             delFromStr: function()
             {
                 this.strForFinal = this.strForFinal.slice(0, -1);
+                this.getShow(this.strForFinal);
+            },
+            reFresh: function() {
+                this.strForFinal = ' ';
+                this.getShow(this.strForFinal);
+            },
+            getShow: function(str) {
+                let coef = orientation() == "portrait"? 1 : 2;
+                let len = str.length;
+                let maxLen = 23 * coef - 1;
+                if (len >= maxLen)
+                {
+                    this.show = str.slice(len - maxLen, len);
+                }
+                else
+                {
+                    let rep = maxLen - len;
+                    this.show = ' '.repeat(rep*1.2) + str;
+                }
             }
         }
     };
-
 </script>
 
 <style scoped lang="scss">
@@ -66,19 +104,39 @@
         font-size: 30pt;
         place-items: center;
         place-content: center;
+        padding: 10px 10px 10px 10px;
+        margin: 10px 10px 10px 10px;
+        color:  #000000;
     }
 
     .label{
         font-size: 30pt;
+        padding-left: 10%;
+        padding-right: 5%;
         place-items: right;
         place-content: right;
         place-self: right;
+        color: #FFFFFF;
+        background-color: #000000;
     }
 
-    .button {
+    .numButton {
         font-size: 30pt;
         place-items: center;
         place-content: center;
         place-self: center;
+        margin: 10px 10px 10px 10px;
+        color: #FFFFFF;
+        background-color: #000000;
     }
+    .funcButton {
+        font-size: 30pt;
+        place-items: center;
+        place-content: center;
+        place-self: center;
+        margin: 10px 10px 10px 10px;
+        color: #FFFF00;
+        background-color: #000000;
+    }
+
 </style>
