@@ -53,7 +53,7 @@ import { orientation } from '@nativescript/core/application';
     export default {
         data () {
             return {
-            show: ' ',
+            show: '',
             strForFinal: '',
             }
         },
@@ -93,8 +93,7 @@ import { orientation } from '@nativescript/core/application';
                     this.show = str.slice(len - maxLen, len);
                 }
                 else {
-                    let rep = maxLen - len;
-                    this.show = ' '.repeat(rep*1.2) + str;
+                    this.show = str;
                 }
             }
         }
